@@ -1,0 +1,7 @@
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\bin\Debug\CarSalesCompanyModels.dll.config
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\bin\Debug\CarSalesCompanyModels.dll
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\bin\Debug\CarSalesCompanyModels.pdb
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\bin\Debug\EntityFramework.dll
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\bin\Debug\EntityFramework.xml
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\obj\Debug\CarSalesCompanyModels.dll
+C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesCompanyModels\obj\Debug\CarSalesCompanyModels.pdb

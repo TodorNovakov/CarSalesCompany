@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarSalesCompanyModelStoreContainer" CdmEntityContainer="CarSalesCompanyEntities">
+    <EntitySetMapping Name="EngineTypes">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.EngineType">
+        <MappingFragment StoreEntitySet="EngineTypes">
+          <ScalarProperty Name="TypeOfEngine" ColumnName="TypeOfEngine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturers">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.Person">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Id_Person" ColumnName="Id_Person" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesHistories">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.SalesHistory">
+        <MappingFragment StoreEntitySet="SalesHistory">
+          <ScalarProperty Name="Id_Person" ColumnName="Id_Person" />
+          <ScalarProperty Name="Id_Vehicle" ColumnName="Id_Vehicle" />
+          <ScalarProperty Name="DateSale" ColumnName="DateSale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleExtras">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.VehicleExtra">
+        <MappingFragment StoreEntitySet="VehicleExtras">
+          <ScalarProperty Name="Id_Extras" ColumnName="Id_Extras" />
+          <ScalarProperty Name="ABS" ColumnName="ABS" />
+          <ScalarProperty Name="ESP" ColumnName="ESP" />
+          <ScalarProperty Name="ElectricWindows" ColumnName="ElectricWindows" />
+          <ScalarProperty Name="ElectricSideMirrors" ColumnName="ElectricSideMirrors" />
+          <ScalarProperty Name="AirConditioner" ColumnName="AirConditioner" />
+          <ScalarProperty Name="AuxiliaryHeater" ColumnName="AuxiliaryHeater" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.Vehicle">
+        <MappingFragment StoreEntitySet="Vehicles">
+          <ScalarProperty Name="Id_Vehicle" ColumnName="Id_Vehicle" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Producer" ColumnName="Producer" />
+          <ScalarProperty Name="Id_Extras" ColumnName="Id_Extras" />
+          <ScalarProperty Name="YearOfProduction" ColumnName="YearOfProduction" />
+          <ScalarProperty Name="TransmissionType" ColumnName="TransmissionType" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="CoupeType" ColumnName="CoupeType" />
+          <ScalarProperty Name="Sold" ColumnName="Sold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleTypes">
+      <EntityTypeMapping TypeName="CarSalesCompanyModel.VehicleType">
+        <MappingFragment StoreEntitySet="VehicleTypes">
+          <ScalarProperty Name="TypeOfVehicle" ColumnName="TypeOfVehicle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

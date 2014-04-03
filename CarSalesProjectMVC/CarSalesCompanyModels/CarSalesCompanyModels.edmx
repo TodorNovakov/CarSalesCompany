@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarSalesCompanyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CarSalesCompanyModelStoreContainer">
+          <EntitySet Name="EngineTypes" EntityType="CarSalesCompanyModel.Store.EngineTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Store.Manufacturers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SalesHistory" EntityType="CarSalesCompanyModel.Store.SalesHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.Store.VehicleExtras" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Store.Vehicles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.Store.VehicleTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_SalesHistory_Person" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="SalesHistory" EntitySet="SalesHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesHistory_Vehicle" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Vehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="SalesHistory" EntitySet="SalesHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.Store.FK_Vehicle_EngineType">
+            <End Role="EngineTypes" EntitySet="EngineTypes" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_Manufacturers" Association="CarSalesCompanyModel.Store.FK_Vehicle_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_VehicleExtras" Association="CarSalesCompanyModel.Store.FK_Vehicle_VehicleExtras">
+            <End Role="VehicleExtras" EntitySet="VehicleExtras" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_VehicleType" Association="CarSalesCompanyModel.Store.FK_Vehicle_VehicleType">
+            <End Role="VehicleTypes" EntitySet="VehicleTypes" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EngineTypes">
+          <Key>
+            <PropertyRef Name="TypeOfEngine" />
+          </Key>
+          <Property Name="TypeOfEngine" Type="varchar" Nullable="false" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id_Person" />
+          </Key>
+          <Property Name="Id_Person" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="Contact" Type="varchar" Nullable="false" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="SalesHistory">
+          <Key>
+            <PropertyRef Name="Id_Person" />
+            <PropertyRef Name="Id_Vehicle" />
+          </Key>
+          <Property Name="Id_Person" Type="int" Nullable="false" />
+          <Property Name="Id_Vehicle" Type="int" Nullable="false" />
+          <Property Name="DateSale" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleExtras">
+          <Key>
+            <PropertyRef Name="Id_Extras" />
+          </Key>
+          <Property Name="Id_Extras" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ABS" Type="bit" Nullable="false" />
+          <Property Name="ESP" Type="bit" Nullable="false" />
+          <Property Name="ElectricWindows" Type="bit" Nullable="false" />
+          <Property Name="ElectricSideMirrors" Type="bit" Nullable="false" />
+          <Property Name="AirConditioner" Type="bit" Nullable="false" />
+          <Property Name="AuxiliaryHeater" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id_Vehicle" />
+          </Key>
+          <Property Name="Id_Vehicle" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="VehicleType" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="EngineType" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="Producer" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="Id_Extras" Type="int" Nullable="false" />
+          <Property Name="YearOfProduction" Type="datetime" Nullable="false" />
+          <Property Name="TransmissionType" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="Colour" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="CoupeType" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="Sold" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleTypes">
+          <Key>
+            <PropertyRef Name="TypeOfVehicle" />
+          </Key>
+          <Property Name="TypeOfVehicle" Type="varchar" Nullable="false" MaxLength="16" />
+        </EntityType>
+        <Association Name="FK_SalesHistory_Person">
+          <End Role="Persons" Type="CarSalesCompanyModel.Store.Persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="CarSalesCompanyModel.Store.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id_Person" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="Id_Person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesHistory_Vehicle">
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Store.Vehicles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="CarSalesCompanyModel.Store.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id_Vehicle" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="Id_Vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_EngineType">
+          <End Role="EngineTypes" Type="CarSalesCompanyModel.Store.EngineTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Store.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineTypes">
+              <PropertyRef Name="TypeOfEngine" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="EngineType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_Manufacturers">
+          <End Role="Manufacturers" Type="CarSalesCompanyModel.Store.Manufacturers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Store.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Producer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_VehicleExtras">
+          <End Role="VehicleExtras" Type="CarSalesCompanyModel.Store.VehicleExtras" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Store.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleExtras">
+              <PropertyRef Name="Id_Extras" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Id_Extras" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_VehicleType">
+          <End Role="VehicleTypes" Type="CarSalesCompanyModel.Store.VehicleTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Store.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleTypes">
+              <PropertyRef Name="TypeOfVehicle" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarSalesCompanyModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CarSalesCompanyEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="EngineTypes" EntityType="CarSalesCompanyModel.EngineType" />
+          <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Manufacturer" />
+          <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Person" />
+          <EntitySet Name="SalesHistories" EntityType="CarSalesCompanyModel.SalesHistory" />
+          <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.VehicleExtra" />
+          <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Vehicle" />
+          <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.VehicleType" />
+          <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.FK_Vehicle_EngineType">
+            <End Role="EngineTypes" EntitySet="EngineTypes" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_Manufacturers" Association="CarSalesCompanyModel.FK_Vehicle_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesHistory_Person" Association="CarSalesCompanyModel.FK_SalesHistory_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="SalesHistory" EntitySet="SalesHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesHistory_Vehicle" Association="CarSalesCompanyModel.FK_SalesHistory_Vehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="SalesHistory" EntitySet="SalesHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_VehicleExtras" Association="CarSalesCompanyModel.FK_Vehicle_VehicleExtras">
+            <End Role="VehicleExtras" EntitySet="VehicleExtras" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicle_VehicleType" Association="CarSalesCompanyModel.FK_Vehicle_VehicleType">
+            <End Role="VehicleTypes" EntitySet="VehicleTypes" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EngineType">
+          <Key>
+            <PropertyRef Name="TypeOfEngine" />
+          </Key>
+          <Property Name="TypeOfEngine" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_EngineType" FromRole="EngineTypes" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_Manufacturers" FromRole="Manufacturers" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id_Person" />
+          </Key>
+          <Property Name="Id_Person" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SalesHistories" Relationship="CarSalesCompanyModel.FK_SalesHistory_Person" FromRole="Persons" ToRole="SalesHistory" />
+        </EntityType>
+        <EntityType Name="SalesHistory">
+          <Key>
+            <PropertyRef Name="Id_Person" />
+            <PropertyRef Name="Id_Vehicle" />
+          </Key>
+          <Property Name="Id_Person" Type="Int32" Nullable="false" />
+          <Property Name="Id_Vehicle" Type="Int32" Nullable="false" />
+          <Property Name="DateSale" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="CarSalesCompanyModel.FK_SalesHistory_Person" FromRole="SalesHistory" ToRole="Persons" />
+          <NavigationProperty Name="Vehicle" Relationship="CarSalesCompanyModel.FK_SalesHistory_Vehicle" FromRole="SalesHistory" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="VehicleExtra">
+          <Key>
+            <PropertyRef Name="Id_Extras" />
+          </Key>
+          <Property Name="Id_Extras" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ABS" Type="Boolean" Nullable="false" />
+          <Property Name="ESP" Type="Boolean" Nullable="false" />
+          <Property Name="ElectricWindows" Type="Boolean" Nullable="false" />
+          <Property Name="ElectricSideMirrors" Type="Boolean" Nullable="false" />
+          <Property Name="AirConditioner" Type="Boolean" Nullable="false" />
+          <Property Name="AuxiliaryHeater" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleExtras" FromRole="VehicleExtras" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id_Vehicle" />
+          </Key>
+          <Property Name="Id_Vehicle" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="VehicleType" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="EngineType" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="Producer" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="Id_Extras" Type="Int32" Nullable="false" />
+          <Property Name="YearOfProduction" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransmissionType" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="Colour" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="CoupeType" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <Property Name="Sold" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EngineType1" Relationship="CarSalesCompanyModel.FK_Vehicle_EngineType" FromRole="Vehicles" ToRole="EngineTypes" />
+          <NavigationProperty Name="Manufacturer" Relationship="CarSalesCompanyModel.FK_Vehicle_Manufacturers" FromRole="Vehicles" ToRole="Manufacturers" />
+          <NavigationProperty Name="SalesHistories" Relationship="CarSalesCompanyModel.FK_SalesHistory_Vehicle" FromRole="Vehicles" ToRole="SalesHistory" />
+          <NavigationProperty Name="VehicleExtra" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleExtras" FromRole="Vehicles" ToRole="VehicleExtras" />
+          <NavigationProperty Name="VehicleType1" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleType" FromRole="Vehicles" ToRole="VehicleTypes" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="TypeOfVehicle" />
+          </Key>
+          <Property Name="TypeOfVehicle" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleType" FromRole="VehicleTypes" ToRole="Vehicles" />
+        </EntityType>
+        <Association Name="FK_Vehicle_EngineType">
+          <End Role="EngineTypes" Type="CarSalesCompanyModel.EngineType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineTypes">
+              <PropertyRef Name="TypeOfEngine" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="EngineType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_Manufacturers">
+          <End Role="Manufacturers" Type="CarSalesCompanyModel.Manufacturer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Producer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesHistory_Person">
+          <End Role="Persons" Type="CarSalesCompanyModel.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="CarSalesCompanyModel.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id_Person" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="Id_Person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesHistory_Vehicle">
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Vehicle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SalesHistory" Type="CarSalesCompanyModel.SalesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id_Vehicle" />
+            </Principal>
+            <Dependent Role="SalesHistory">
+              <PropertyRef Name="Id_Vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_VehicleExtras">
+          <End Role="VehicleExtras" Type="CarSalesCompanyModel.VehicleExtra" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleExtras">
+              <PropertyRef Name="Id_Extras" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Id_Extras" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicle_VehicleType">
+          <End Role="VehicleTypes" Type="CarSalesCompanyModel.VehicleType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="CarSalesCompanyModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleTypes">
+              <PropertyRef Name="TypeOfVehicle" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarSalesCompanyModelStoreContainer" CdmEntityContainer="CarSalesCompanyEntities">
+          <EntitySetMapping Name="EngineTypes">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.EngineType">
+              <MappingFragment StoreEntitySet="EngineTypes">
+                <ScalarProperty Name="TypeOfEngine" ColumnName="TypeOfEngine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id_Person" ColumnName="Id_Person" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesHistories">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.SalesHistory">
+              <MappingFragment StoreEntitySet="SalesHistory">
+                <ScalarProperty Name="Id_Person" ColumnName="Id_Person" />
+                <ScalarProperty Name="Id_Vehicle" ColumnName="Id_Vehicle" />
+                <ScalarProperty Name="DateSale" ColumnName="DateSale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleExtras">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.VehicleExtra">
+              <MappingFragment StoreEntitySet="VehicleExtras">
+                <ScalarProperty Name="Id_Extras" ColumnName="Id_Extras" />
+                <ScalarProperty Name="ABS" ColumnName="ABS" />
+                <ScalarProperty Name="ESP" ColumnName="ESP" />
+                <ScalarProperty Name="ElectricWindows" ColumnName="ElectricWindows" />
+                <ScalarProperty Name="ElectricSideMirrors" ColumnName="ElectricSideMirrors" />
+                <ScalarProperty Name="AirConditioner" ColumnName="AirConditioner" />
+                <ScalarProperty Name="AuxiliaryHeater" ColumnName="AuxiliaryHeater" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Id_Vehicle" ColumnName="Id_Vehicle" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="Id_Extras" ColumnName="Id_Extras" />
+                <ScalarProperty Name="YearOfProduction" ColumnName="YearOfProduction" />
+                <ScalarProperty Name="TransmissionType" ColumnName="TransmissionType" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
+                <ScalarProperty Name="CoupeType" ColumnName="CoupeType" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleTypes">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.VehicleType">
+              <MappingFragment StoreEntitySet="VehicleTypes">
+                <ScalarProperty Name="TypeOfVehicle" ColumnName="TypeOfVehicle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

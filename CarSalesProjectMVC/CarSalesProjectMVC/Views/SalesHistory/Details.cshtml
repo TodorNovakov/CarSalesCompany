@@ -1,0 +1,55 @@
+﻿@model CarSalesCompanyModels.SalesHistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SalesHistory</legend>
+
+     <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.Id_Person)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.Id_Person)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.LastName)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Vehicle.Model)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Vehicle.Model)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Vehicle.Id_Vehicle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Vehicle.Id_Vehicle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateSale)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateSale)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
