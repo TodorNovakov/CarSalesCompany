@@ -40,8 +40,8 @@ namespace CarSalesProjectMVC.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Id_Person = new SelectList(db.Persons, "Id_Person", "LastName");
-            ViewBag.Id_Vehicle = new SelectList(db.Vehicles, "Id_Vehicle", "Model");
+            ViewBag.Id_Person = new SelectList(db.Persons, "Id_Person", "Id_Person");
+            ViewBag.Id_Vehicle = new SelectList(db.Vehicles.Where(v=>v.Sold==false), "Id_Vehicle","Id_Vehicle");
             return View();
         }
 

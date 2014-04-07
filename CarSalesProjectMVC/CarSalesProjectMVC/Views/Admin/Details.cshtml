@@ -1,0 +1,92 @@
+﻿@model CarSalesCompanyModels.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Vehicle</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Id_Vehicle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Id_Vehicle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Model)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Model)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VehicleType1.TypeOfVehicle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VehicleType1.TypeOfVehicle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EngineType1.TypeOfEngine)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EngineType1.TypeOfEngine)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Manufacturer.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Manufacturer.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VehicleExtra.Id_Extras)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VehicleExtra.Id_Extras)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.YearOfProduction)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.YearOfProduction)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TransmissionType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TransmissionType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Colour)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Colour)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CoupeType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CoupeType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sold)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sold)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

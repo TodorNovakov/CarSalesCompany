@@ -1,6 +1,7 @@
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesProjectMVC.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesProjectMVC.pdb
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\Antlr3.Runtime.dll
+c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesCompanyModels.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\DotNetOpenAuth.AspNet.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\DotNetOpenAuth.Core.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\DotNetOpenAuth.OAuth.Consumer.dll
@@ -29,6 +30,7 @@ c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSa
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\WebGrease.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\WebMatrix.Data.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\WebMatrix.WebData.dll
+c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesCompanyModels.pdb
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\EntityFramework.xml
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\Newtonsoft.Json.xml
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\System.Net.Http.Formatting.xml
@@ -83,5 +85,3 @@ c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSa
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\obj\Debug\CarSalesProjectMVC.csprojResolveAssemblyReference.cache
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\obj\Debug\CarSalesProjectMVC.dll
 c:\users\toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\obj\Debug\CarSalesProjectMVC.pdb
-C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesCompanyModels.dll
-C:\Users\Toshkata\documents\visual studio 2012\Projects\CarSalesProjectMVC\CarSalesProjectMVC\bin\CarSalesCompanyModels.pdb

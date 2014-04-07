@@ -4,15 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CarSalesCompanyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CarSalesCompanyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CarSalesCompanyModelStoreContainer">
           <EntitySet Name="EngineTypes" EntityType="CarSalesCompanyModel.Store.EngineTypes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Store.Manufacturers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Store.Persons" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SalesHistory" EntityType="CarSalesCompanyModel.Store.SalesHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="CarSalesCompanyModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.Store.VehicleExtras" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Store.Vehicles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.Store.VehicleTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="CarSalesCompanyModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="CarSalesCompanyModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="CarSalesCompanyModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="CarSalesCompanyModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_RoleId" Association="CarSalesCompanyModel.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_SalesHistory_Person" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Person">
             <End Role="Persons" EntitySet="Persons" />
             <End Role="SalesHistory" EntitySet="SalesHistory" />
@@ -20,6 +29,10 @@
           <AssociationSet Name="FK_SalesHistory_Vehicle" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Vehicle">
             <End Role="Vehicles" EntitySet="Vehicles" />
             <End Role="SalesHistory" EntitySet="SalesHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="CarSalesCompanyModel.Store.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.Store.FK_Vehicle_EngineType">
             <End Role="EngineTypes" EntitySet="EngineTypes" />
@@ -68,6 +81,13 @@
           <Property Name="Id_Vehicle" Type="int" Nullable="false" />
           <Property Name="DateSale" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+        </EntityType>
         <EntityType Name="VehicleExtras">
           <Key>
             <PropertyRef Name="Id_Extras" />
@@ -102,6 +122,58 @@
           </Key>
           <Property Name="TypeOfVehicle" Type="varchar" Nullable="false" MaxLength="16" />
         </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="CarSalesCompanyModel.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="CarSalesCompanyModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SalesHistory_Person">
           <End Role="Persons" Type="CarSalesCompanyModel.Store.Persons" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -127,6 +199,18 @@
             </Principal>
             <Dependent Role="SalesHistory">
               <PropertyRef Name="Id_Vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="CarSalesCompanyModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="CarSalesCompanyModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,7 +270,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarSalesCompanyModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -195,9 +280,13 @@
           <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Manufacturer" />
           <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Person" />
           <EntitySet Name="SalesHistories" EntityType="CarSalesCompanyModel.SalesHistory" />
+          <EntitySet Name="UserProfiles" EntityType="CarSalesCompanyModel.UserProfile" />
           <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.VehicleExtra" />
           <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Vehicle" />
           <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.VehicleType" />
+          <EntitySet Name="webpages_Membership" EntityType="CarSalesCompanyModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="CarSalesCompanyModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="CarSalesCompanyModel.webpages_Roles" />
           <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.FK_Vehicle_EngineType">
             <End Role="EngineTypes" EntitySet="EngineTypes" />
             <End Role="Vehicles" EntitySet="Vehicles" />
@@ -221,6 +310,10 @@
           <AssociationSet Name="FK_Vehicle_VehicleType" Association="CarSalesCompanyModel.FK_Vehicle_VehicleType">
             <End Role="VehicleTypes" EntitySet="VehicleTypes" />
             <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="CarSalesCompanyModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="EngineType">
@@ -257,6 +350,14 @@
           <Property Name="DateSale" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Person" Relationship="CarSalesCompanyModel.FK_SalesHistory_Person" FromRole="SalesHistory" ToRole="Persons" />
           <NavigationProperty Name="Vehicle" Relationship="CarSalesCompanyModel.FK_SalesHistory_Vehicle" FromRole="SalesHistory" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="CarSalesCompanyModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="VehicleExtra">
           <Key>
@@ -298,6 +399,39 @@
           </Key>
           <Property Name="TypeOfVehicle" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleType" FromRole="VehicleTypes" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="CarSalesCompanyModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
         </EntityType>
         <Association Name="FK_Vehicle_EngineType">
           <End Role="EngineTypes" Type="CarSalesCompanyModel.EngineType" Multiplicity="1">
@@ -383,6 +517,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="CarSalesCompanyModel.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="CarSalesCompanyModel.UserProfile" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -419,6 +557,14 @@
                 <ScalarProperty Name="Id_Person" ColumnName="Id_Person" />
                 <ScalarProperty Name="Id_Vehicle" ColumnName="Id_Vehicle" />
                 <ScalarProperty Name="DateSale" ColumnName="DateSale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -459,6 +605,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="CarSalesCompanyModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="CarSalesCompanyModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

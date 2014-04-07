@@ -1,0 +1,22 @@
+﻿@model CarSalesCompanyModels.VehicleType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>VehicleType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeOfVehicle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeOfVehicle)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TypeOfVehicle }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

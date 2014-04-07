@@ -37,7 +37,9 @@ namespace CarSalesProjectMVC.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                //return RedirectToLocal(returnUrl);
+
+                return RedirectToAction("Index", "Admin");
             }
 
             // If we got this far, something failed, redisplay form
@@ -61,7 +63,7 @@ namespace CarSalesProjectMVC.Controllers
         // GET: /Account/Register
 
         [AllowAnonymous]
-        public ActionResult Register()
+        protected ActionResult Register()
         {
             return View();
         }
@@ -72,7 +74,7 @@ namespace CarSalesProjectMVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        protected ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {

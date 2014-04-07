@@ -5,9 +5,18 @@
     <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Store.Manufacturers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Store.Persons" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SalesHistory" EntityType="CarSalesCompanyModel.Store.SalesHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProfile" EntityType="CarSalesCompanyModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.Store.VehicleExtras" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Store.Vehicles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.Store.VehicleTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="webpages_Membership" EntityType="CarSalesCompanyModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="CarSalesCompanyModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="webpages_Roles" EntityType="CarSalesCompanyModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="webpages_UsersInRoles" EntityType="CarSalesCompanyModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_RoleId" Association="CarSalesCompanyModel.Store.fk_RoleId">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
     <AssociationSet Name="FK_SalesHistory_Person" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Person">
       <End Role="Persons" EntitySet="Persons" />
       <End Role="SalesHistory" EntitySet="SalesHistory" />
@@ -15,6 +24,10 @@
     <AssociationSet Name="FK_SalesHistory_Vehicle" Association="CarSalesCompanyModel.Store.FK_SalesHistory_Vehicle">
       <End Role="Vehicles" EntitySet="Vehicles" />
       <End Role="SalesHistory" EntitySet="SalesHistory" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="CarSalesCompanyModel.Store.fk_UserId">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
     </AssociationSet>
     <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.Store.FK_Vehicle_EngineType">
       <End Role="EngineTypes" EntitySet="EngineTypes" />
@@ -63,6 +76,13 @@
     <Property Name="Id_Vehicle" Type="int" Nullable="false" />
     <Property Name="DateSale" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+  </EntityType>
   <EntityType Name="VehicleExtras">
     <Key>
       <PropertyRef Name="Id_Extras" />
@@ -97,6 +117,58 @@
     </Key>
     <Property Name="TypeOfVehicle" Type="varchar" Nullable="false" MaxLength="16" />
   </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsConfirmed" Type="bit" />
+    <Property Name="LastPasswordFailureDate" Type="datetime" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PasswordChangedDate" Type="datetime" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="webpages_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_RoleId">
+    <End Role="webpages_Roles" Type="CarSalesCompanyModel.Store.webpages_Roles" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="CarSalesCompanyModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="webpages_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SalesHistory_Person">
     <End Role="Persons" Type="CarSalesCompanyModel.Store.Persons" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -122,6 +194,18 @@
       </Principal>
       <Dependent Role="SalesHistory">
         <PropertyRef Name="Id_Vehicle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="UserProfile" Type="CarSalesCompanyModel.Store.UserProfile" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="CarSalesCompanyModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

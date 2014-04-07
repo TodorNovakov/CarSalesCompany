@@ -5,9 +5,13 @@
     <EntitySet Name="Manufacturers" EntityType="CarSalesCompanyModel.Manufacturer" />
     <EntitySet Name="Persons" EntityType="CarSalesCompanyModel.Person" />
     <EntitySet Name="SalesHistories" EntityType="CarSalesCompanyModel.SalesHistory" />
+    <EntitySet Name="UserProfiles" EntityType="CarSalesCompanyModel.UserProfile" />
     <EntitySet Name="VehicleExtras" EntityType="CarSalesCompanyModel.VehicleExtra" />
     <EntitySet Name="Vehicles" EntityType="CarSalesCompanyModel.Vehicle" />
     <EntitySet Name="VehicleTypes" EntityType="CarSalesCompanyModel.VehicleType" />
+    <EntitySet Name="webpages_Membership" EntityType="CarSalesCompanyModel.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="CarSalesCompanyModel.webpages_OAuthMembership" />
+    <EntitySet Name="webpages_Roles" EntityType="CarSalesCompanyModel.webpages_Roles" />
     <AssociationSet Name="FK_Vehicle_EngineType" Association="CarSalesCompanyModel.FK_Vehicle_EngineType">
       <End Role="EngineTypes" EntitySet="EngineTypes" />
       <End Role="Vehicles" EntitySet="Vehicles" />
@@ -31,6 +35,10 @@
     <AssociationSet Name="FK_Vehicle_VehicleType" Association="CarSalesCompanyModel.FK_Vehicle_VehicleType">
       <End Role="VehicleTypes" EntitySet="VehicleTypes" />
       <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="webpages_UsersInRoles" Association="CarSalesCompanyModel.webpages_UsersInRoles">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="EngineType">
@@ -67,6 +75,14 @@
     <Property Name="DateSale" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Person" Relationship="CarSalesCompanyModel.FK_SalesHistory_Person" FromRole="SalesHistory" ToRole="Persons" />
     <NavigationProperty Name="Vehicle" Relationship="CarSalesCompanyModel.FK_SalesHistory_Vehicle" FromRole="SalesHistory" ToRole="Vehicles" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="webpages_Roles" Relationship="CarSalesCompanyModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
   </EntityType>
   <EntityType Name="VehicleExtra">
     <Key>
@@ -108,6 +124,39 @@
     </Key>
     <Property Name="TypeOfVehicle" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Vehicles" Relationship="CarSalesCompanyModel.FK_Vehicle_VehicleType" FromRole="VehicleTypes" ToRole="Vehicles" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="IsConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="CarSalesCompanyModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
   </EntityType>
   <Association Name="FK_Vehicle_EngineType">
     <End Role="EngineTypes" Type="CarSalesCompanyModel.EngineType" Multiplicity="1">
@@ -192,5 +241,9 @@
         <PropertyRef Name="VehicleType" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="webpages_UsersInRoles">
+    <End Role="webpages_Roles" Type="CarSalesCompanyModel.webpages_Roles" Multiplicity="*" />
+    <End Role="UserProfile" Type="CarSalesCompanyModel.UserProfile" Multiplicity="*" />
   </Association>
 </Schema>

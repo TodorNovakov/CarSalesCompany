@@ -1,0 +1,116 @@
+﻿@model CarSalesCompanyModels.Vehicle
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Vehicle</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Id_Vehicle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Id_Vehicle)
+            @Html.ValidationMessageFor(model => model.Id_Vehicle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Model)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Model)
+            @Html.ValidationMessageFor(model => model.Model)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VehicleType, "VehicleType1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("VehicleType", String.Empty)
+            @Html.ValidationMessageFor(model => model.VehicleType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EngineType, "EngineType1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EngineType", String.Empty)
+            @Html.ValidationMessageFor(model => model.EngineType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Producer, "Manufacturer")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Producer", String.Empty)
+            @Html.ValidationMessageFor(model => model.Producer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Id_Extras, "VehicleExtra")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Id_Extras", String.Empty)
+            @Html.ValidationMessageFor(model => model.Id_Extras)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.YearOfProduction)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.YearOfProduction)
+            @Html.ValidationMessageFor(model => model.YearOfProduction)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransmissionType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TransmissionType)
+            @Html.ValidationMessageFor(model => model.TransmissionType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Colour)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Colour)
+            @Html.ValidationMessageFor(model => model.Colour)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CoupeType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CoupeType)
+            @Html.ValidationMessageFor(model => model.CoupeType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sold)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sold)
+            @Html.ValidationMessageFor(model => model.Sold)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -4,20 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="319cd543ba684961b37ee5e703d85c65" Name="Diagram1">
+      <Diagram DiagramId="852f14d3029143ef9cc2c683b5bd3653" Name="Diagram1">
         <EntityTypeShape EntityType="CarSalesCompanyModel.EngineType" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.Manufacturer" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.Person" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.SalesHistory" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSalesCompanyModel.UserProfile" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.VehicleExtra" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.Vehicle" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSalesCompanyModel.VehicleType" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSalesCompanyModel.webpages_Membership" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSalesCompanyModel.webpages_OAuthMembership" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSalesCompanyModel.webpages_Roles" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_Vehicle_EngineType" ManuallyRouted="false" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_Vehicle_Manufacturers" ManuallyRouted="false" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_SalesHistory_Person" ManuallyRouted="false" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_SalesHistory_Vehicle" ManuallyRouted="false" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_Vehicle_VehicleExtras" ManuallyRouted="false" />
         <AssociationConnector Association="CarSalesCompanyModel.FK_Vehicle_VehicleType" ManuallyRouted="false" />
+        <AssociationConnector Association="CarSalesCompanyModel.webpages_UsersInRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

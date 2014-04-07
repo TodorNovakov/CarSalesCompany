@@ -29,8 +29,12 @@ namespace CarSalesCompanyModels
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<SalesHistory> SalesHistories { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<VehicleExtra> VehicleExtras { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
     }
 }

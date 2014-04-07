@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.ActionLink("All Vehicles", "AllVehicles", "Admin")
+</div>
+<div>
+    @Html.ActionLink("Vehicles in sale", "SellVehicles", "Admin")
+</div>
+<div>
+    @Html.ActionLink("Sold Vehicles", "SoldVehicles", "Admin")
+</div>
+<div>
+    @Html.ActionLink("Add Vehicle", "Create", "Vehicle")
+</div>
+<div>
+    @Html.ActionLink("All Customers", "Index", "Person")
+</div>
+<div>
+    @Html.ActionLink("Add Customer", "Create", "Person")
+</div>
+<div>
+    @Html.ActionLink("Sales History", "Index", "SalesHistory")
+</div>
+<div>
+    @Html.ActionLink("Make deal", "Create", "SalesHistory")
+</div>

@@ -80,8 +80,10 @@ namespace CarSalesProjectMVC.Controllers
             }
             ViewBag.EngineType = new SelectList(db.EngineTypes, "TypeOfEngine", "TypeOfEngine", vehicle.EngineType);
             ViewBag.Producer = new SelectList(db.Manufacturers, "Name", "Name", vehicle.Producer);
-            ViewBag.Id_Extras = new SelectList(db.VehicleExtras, "Id_Extras", "Id_Extras", vehicle.Id_Extras);
+            //ViewBag.Id_Extras = new SelectList(db.VehicleExtras, "Id_Extras", "Id_Extras", vehicle.Id_Extras);
             ViewBag.VehicleType = new SelectList(db.VehicleTypes, "TypeOfVehicle", "TypeOfVehicle", vehicle.VehicleType);
+
+  
             return View(vehicle);
         }
 
